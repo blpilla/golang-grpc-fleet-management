@@ -1,12 +1,8 @@
 package driver
 
-import (
-	"gorm.io/gorm"
-)
-
 type Driver struct {
-	gorm.Model
-	FirstName string
-	LastName  string
-	License   string
+	ID        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	License   string `json:"license"`
 }

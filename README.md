@@ -88,3 +88,66 @@ Este projeto é uma aplicação backend para gerenciar motoristas e veículos, e
 9. Listar todas as associações de motoristas com veículos:
    
    grpcurl -plaintext -d '{}' localhost:50051 proto.AssociationService/GetAllAssociations
+   
+
+## Estrutura do Projeto
+
+plaintext
+.
+├── cmd
+│   └── server
+│       └── main.go
+├── db
+│   └── migrations
+│       ├── 000001_create_tables.down.sql
+│       └── 000001_create_tables.up.sql
+├── docker-compose.yml
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── internal
+│   ├── association
+│   │   ├── grpc_service.go
+│   │   ├── handler.go
+│   │   ├── model.go
+│   │   ├── repository.go
+│   │   ├── service.go
+│   │   └── service_test.go
+│   ├── db
+│   │   └── postgresql.go
+│   ├── driver
+│   │   ├── grpc_service.go
+│   │   ├── handler.go
+│   │   ├── model.go
+│   │   ├── repository.go
+│   │   ├── service.go
+│   │   └── service_test.go
+│   ├── grpc
+│   │   ├── client.go
+│   │   └── server.go
+│   ├── util
+│   │   └── logger.go
+│   └── vehicle
+│       ├── grpc_service.go
+│       ├── handler.go
+│       ├── model.go
+│       ├── repository.go
+│       ├── service.go
+│       └── service_test.go
+├── migrate.go
+├── pkg
+│   └── config
+│       └── config.go
+├── proto
+│   ├── association_grpc.pb.go
+│   ├── association.pb.go
+│   ├── association.proto
+│   ├── driver_grpc.pb.go
+│   ├── driver.pb.go
+│   ├── driver.proto
+│   ├── vehicle_grpc.pb.go
+│   ├── vehicle.pb.go
+│   └── vehicle.proto
+├── README.md
+└── wait-for-it.sh
+

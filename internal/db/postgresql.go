@@ -1,20 +1,41 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	_ "github.com/lib/pq"
 )
 
-func NewPostgreSQL() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+type PostgreSQL struct {
+	*sql.DB
+}
+
+func NewPostgreSQL() (*PostgreSQL, error) {
+	connStr := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_NAME"),
-		os.Getenv("DB_PORT"),
 	)
-	return gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := db.Ping(); err != nil {
+		return nil, err
+	}
+
+	log.Println("Connected to PostgreSQL database")
+	return &PostgreSQL{DB: db}, nil
+}
+
+func (p *PostgreSQL) Close() error {
+	return p.DB.Close()
 }

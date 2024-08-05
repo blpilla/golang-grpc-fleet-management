@@ -1,11 +1,9 @@
 package vehicle
 
-import (
-	"gorm.io/gorm"
-)
-
 type Vehicle struct {
-	gorm.Model
-	Make  string
-	Model string
+	ID      int    `json:"id"`
+	Make    string `json:"make"`
+	Model   string `json:"model"`
+	Year    int    `json:"year"`
+	License string `json:"license"`
 }
