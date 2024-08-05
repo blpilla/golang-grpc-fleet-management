@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS associations;
+DROP TABLE IF EXISTS vehicles;
+DROP TABLE IF EXISTS drivers;

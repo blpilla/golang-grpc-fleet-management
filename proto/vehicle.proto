@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "fleet_management/proto";
+
+// Serviço de Vehicle
+service VehicleService {
+  rpc CreateVehicle(CreateVehicleRequest) returns (VehicleResponse);
+  rpc GetVehicleByID(GetVehicleByIDRequest) returns (VehicleResponse);
+  rpc GetAllVehicles(GetAllVehiclesRequest) returns (GetAllVehiclesResponse);
+  rpc UpdateVehicle(UpdateVehicleRequest) returns (VehicleResponse);
+  rpc DeleteVehicle(DeleteVehicleRequest) returns (DeleteVehicleResponse);
+}
+
+// Mensagens de Requisição e Resposta
+message CreateVehicleRequest {
+  string make = 1;
+  string model = 2;
+}
+
+message VehicleResponse {
+  int32 id = 1;
+  string make = 2;
+  string model = 3;
+}
+
+message GetVehicleByIDRequest {
+  int32 id = 1;
+}
+
+message GetAllVehiclesRequest {}
+
+message GetAllVehiclesResponse {
+  repeated VehicleResponse vehicles = 1;
+}
+
+message UpdateVehicleRequest {
+  int32 id = 1;
+  string make = 2;
+  string model = 3;
+}
+
+message DeleteVehicleRequest {
+  int32 id = 1;
+}
+
+message DeleteVehicleResponse {}

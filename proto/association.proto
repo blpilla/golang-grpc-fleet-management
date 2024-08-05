@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "fleet_management/proto";
+
+// Serviço de Associação
+service AssociationService {
+  rpc AssociateDriverToVehicle(AssociateDriverToVehicleRequest) returns (AssociateDriverToVehicleResponse);
+  rpc GetAllAssociations(GetAllAssociationsRequest) returns (GetAllAssociationsResponse);
+  rpc GetDriversByVehicle(GetDriversByVehicleRequest) returns (GetDriversByVehicleResponse);
+  rpc GetVehiclesByDriver(GetVehiclesByDriverRequest) returns (GetVehiclesByDriverResponse);
+  rpc DissociateDriverFromVehicle(DissociateDriverFromVehicleRequest) returns (DissociateDriverFromVehicleResponse);
+}
+
+// Mensagens de Requisição e Resposta
+message AssociateDriverToVehicleRequest {
+  int32 driver_id = 1;
+  int32 vehicle_id = 2;
+}
+
+message AssociateDriverToVehicleResponse {}
+
+message GetAllAssociationsRequest {}
+
+message GetAllAssociationsResponse {
+  repeated Association associations = 1;
+}
+
+message GetDriversByVehicleRequest {
+  int32 vehicle_id = 1;
+}
+
+message GetDriversByVehicleResponse {
+  repeated int32 driver_ids = 1;
+}
+
+message GetVehiclesByDriverRequest {
+  int32 driver_id = 1;
+}
+
+message GetVehiclesByDriverResponse {
+  repeated int32 vehicle_ids = 1;
+}
+
+message DissociateDriverFromVehicleRequest {
+  int32 driver_id = 1;
+  int32 vehicle_id = 2;
+}
+
+message DissociateDriverFromVehicleResponse {}
+
+message Association {
+  int32 driver_id = 1;
+  int32 vehicle_id = 2;
+}

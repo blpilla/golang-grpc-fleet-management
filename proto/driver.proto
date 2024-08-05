@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "fleet_management/proto";
+
+// Serviço de Driver
+service DriverService {
+  rpc CreateDriver(CreateDriverRequest) returns (DriverResponse);
+  rpc GetDriverByID(GetDriverByIDRequest) returns (DriverResponse);
+  rpc GetAllDrivers(GetAllDriversRequest) returns (GetAllDriversResponse);
+  rpc UpdateDriver(UpdateDriverRequest) returns (DriverResponse);
+  rpc DeleteDriver(DeleteDriverRequest) returns (DeleteDriverResponse);
+}
+
+// Mensagens de Requisição e Resposta
+message CreateDriverRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string license = 3;
+}
+
+message DriverResponse {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string license = 4;
+}
+
+message GetDriverByIDRequest {
+  int32 id = 1;
+}
+
+message GetAllDriversRequest {}
+
+message GetAllDriversResponse {
+  repeated DriverResponse drivers = 1;
+}
+
+message UpdateDriverRequest {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string license = 4;
+}
+
+message DeleteDriverRequest {
+  int32 id = 1;
+}
+
+message DeleteDriverResponse {}
+
+message Driver {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string license = 4;
+}
